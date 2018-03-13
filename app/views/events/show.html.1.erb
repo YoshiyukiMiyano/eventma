@@ -1,0 +1,33 @@
+
+<p>
+  <strong>Title:</strong>
+  <h1><%= @event.title %></h1>
+</p>
+
+<p>
+  <%= image_tag 'clock.png', :size =>'15x15' %>
+  <%= @event.event_at.to_s(:event_at) %>
+</p>
+
+<p>
+  <%= image_tag 'locater.jpg', :size =>'15x15' %>
+  <%= @event.place %>
+</p>
+
+<p>
+  <strong>Image:</strong>
+  <%= image_tag @event.image %>
+</p>
+
+<p>
+  <strong>詳細:</strong>
+  <%= @event.content %>
+</p>
+
+<p>
+  <strong>Organizer:</strong>
+  <%= @event.organizer_id %>
+</p>
+
+<%= link_to 'Edit', edit_event_path(@event) %> |
+<%= link_to 'Back', events_path %>

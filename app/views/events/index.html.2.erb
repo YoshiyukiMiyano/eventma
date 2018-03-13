@@ -1,0 +1,33 @@
+<h1>気になるイベントを見つけよう</h1><br>
+
+<table>
+  <tbody>
+    <% @events.each do |event| %>
+      <tr>  
+        <td><%= event.event_at.to_s(:date) %></td>
+      </tr>
+      <tr>  
+        <td><%= event.event_at.to_s(:time) %></td>
+      </tr>
+      <tr>
+        <td><h1><%= link_to event.title, event %></h1></td>
+      </tr>
+      <tr>  
+        <td><%= event.place %></td>
+      </tr>
+      <tr>  
+        <td><%= event.content %></td>
+      </tr>
+      <tr>  
+        <td><%= image_tag event.image, :size =>'50x50' %></td>
+        <td><%= link_to 'Show', event %></td>
+        <td><%= link_to 'Edit', edit_event_path(event) %></td>
+        <td><%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Event', new_event_path %>

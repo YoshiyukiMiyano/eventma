@@ -1,0 +1,32 @@
+<h1>Editing User</h1>
+
+<% if false %><%= render 'form', user: @user %><% end %> 
+
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @user.name %>
+</p>
+
+<p>
+  <strong>Email address:</strong>
+  <%= @user.email_address %>
+</p>
+
+<!--  <section>
+  <span> -->
+    <%= image_tag @user.icon %>
+<!--  </span><br>
+  <span class="col-xs-5 col-md-5"></span>
+  <span class="col-xs-7 col-md-7"> -->
+    <%= form.file_field :image %>
+    <%= form.hidden_field :image_cache %>
+<!--  </span>
+  </section> -->
+
+  <%= form.submit %>
+
+
+<%= link_to 'Show', @user %> |
+<%= link_to 'Back', users_path %>

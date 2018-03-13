@@ -1,0 +1,66 @@
+    <div class="jumbotron"  style="background:linear-gradient(-135deg, #34BDE9 0%, #4660D0 100%); background-size:cover;">
+      <div class="container">
+        <h3 class="head">気になるイベントを見つけよう！</h3><br>
+
+        <%= search_form_for @q do |f| %>
+        <div class="row">
+          <div class="col-lg-3">
+          </div>
+          <div class="col-lg-6">
+            <div class="input-group">
+              <%= f.search_field :title_or_content_or_place_cont, 
+              placeholder:"例)　ホワイト、Ruby", class: "form-control" %>
+              <span class="input-group-btn">
+                <button class="btn btn-info" type="submit">
+                  <i class='glyphicon glyphicon-search'></i>
+                </button>
+              </span>
+            </div>
+          </div>
+        </div>
+        <% end %>
+      </div>
+    </div>
+
+
+<div class="row">
+<div class="col-lg-9">
+<table>
+  <tbody>
+    <% @events.each do |event| %>
+    <% if event.event_at >= DateTime.now.to_time %>
+    <table class="list-group-item">
+      <tr>
+        <td><%= event.event_at.to_s(:date) %></td>
+      </tr>
+      <tr>
+        <td><%= event.event_at.to_s(:time) %>
+        <% @event = Event.find(event.id) %>
+        <%= image_tag @event.user.icon, :width => '20', :height => '20' %>
+        <%= @event.user.name %></td>
+      </tr>
+      <tr>
+        <td><h1><%= link_to event.title, event %></h1></td>
+      </tr>
+      <tr>  
+        <td><%= event.place %></td>
+      </tr>
+    </table>
+    <% end %>
+    <% end %>
+  </tbody>
+</table>
+</div>
+<div class="col-lg-3">
+<h3>日付(期間)で探す</h3>
+  <%= search_form_for @q do |f| %>
+    <p><%= f.label :検索開始日 %>
+      <%= f.date_field :event_at_gteq, class: "date",
+      placeholder: "yyyy/mm/dd", value: fdate(params[:q] && params[:q][:event_at_gteq]) %></p>
+    <p><%= f.label :検索終了日 %>
+      <%= f.date_field :event_at_lteq_end_of_day, class: "date", 
+      placeholder: "yyyy/mm/dd", value: fdate(params[:q] && params[:q][:event_at_lteq_end_of_day]) %></p>
+        <input class="btn btn-info" type="submit" value="検索">
+  <% end %>
+</div>
+</div>

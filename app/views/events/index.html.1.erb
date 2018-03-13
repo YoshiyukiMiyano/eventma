@@ -1,0 +1,39 @@
+<h1>Events</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>タイトル</th>
+      <th>日時</th>
+      <th>場所</th>
+      <th>概要</th>
+      <th>画像</th>
+      <th>Organizer</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @events.each do |event| %>
+      <tr>  
+        <td><%= event.event_at %></td>
+      </tr>
+      <tr>
+        <td><h1><%= event.title %></h1></td>
+      </tr>
+      <tr>  
+        <td><%= event.place %></td>
+        <td><%= event.content %></td>
+        <td><%= image_tag event.image, :size =>'50x50' %></td>
+        <td><%= event.organizer_id %></td>
+        <td><%= link_to 'Show', event %></td>
+        <td><%= link_to 'Edit', edit_event_path(event) %></td>
+        <td><%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Event', new_event_path %>

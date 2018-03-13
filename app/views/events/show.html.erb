@@ -1,0 +1,62 @@
+  <div class="panel panel-default">
+    <div class="panel-heading">
+  <h3><%= image_tag @event.user.icon, :width => '40', :height => '40' %>
+    <%= @event.user.name %></h3>
+    </div>
+
+    <div class="jumbotron"  style="background:url(<%= @event.image %>)center no-repeat; background-size:cover;">
+      <div class="container">
+        <h1>　</h1>
+        <h1>　</h1>
+      </div>
+    </div>
+    
+<p>
+  <h2 class="he2"><%= @event.title %></h2>
+</p>
+
+<p class="line">
+  <%= image_tag 'clock.png', :size =>'15x15' %>　
+  <%= @event.event_at.to_s(:event_at) %> ～
+  <%= @event.eventend_at.to_s(:event_at) %>
+</p>
+
+<p class="line">
+  <%= image_tag 'locater.jpg', :size =>'15x15' %>　
+  <%= @event.place %>
+</p>
+
+<p class="line">
+  <%= image_tag 'peple.png', :size =>'15x15' %>　
+    <% @event.participant_users.reverse_each do |event| %>
+        <%= image_tag event.icon, :width => '20', :height => '20' %>
+        <%= event.name %>
+    <% end %>
+</p>
+
+<p class="line">
+<% unless @event.user_id == current_user.id %>
+  <% if @participant.present? %>
+    <%= link_to '申し込みを取り消す', participant_path(event_id: @event.id), method: :delete, class: 'btn btn-danger btn-lg' %>
+  <% else %>
+    <%= link_to '申し込む', participants_path(event_id: @event.id), method: :post, class: 'btn btn-success btn-lg' %>
+  <% end %>
+<% end %>
+</p>
+
+<p class="line">
+  <%= simple_format(@event.content, :class => "content") %>
+</p>
+
+<p></p>
+<p class="line">
+<% if @event.user_id == current_user.id %>
+<%= link_to '編集', edit_event_path(@event), class: 'btn btn-info btn-lg' %> |
+<%= link_to '削除', @event, method: :delete, class: 'btn btn-danger btn-lg', data: { confirm: 'Are you sure?' } %>
+<% end %>
+</p>
+<p></p>
+<p class="line">
+<%= link_to '戻る', events_path %>
+</p>
+</div>

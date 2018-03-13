@@ -1,0 +1,42 @@
+  <h1>Editing User</h1>
+
+<%= form_with(model: @user, local: true) do |form| %>
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+      <ul>
+      <% @user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
+
+
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @user.name %>
+  <%= form.label :name %>
+  <%= form.text_field :name, id: :user_name %>
+</p>
+
+<p>
+  <strong>Email address:</strong>
+  <%= @user.email_address %>
+</p>
+
+  <%= image_tag @user.icon %>
+  <%= form.file_field :icon %>
+  <%= form.hidden_field :image_cache %>
+
+  <%= form.submit %>
+
+<p>
+<%= link_to 'Back', user_path %>
+</p>
+
+<% end %>

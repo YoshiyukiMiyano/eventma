@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Eventma</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    
+    <nav class="navbar navbar-default">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#gnavi">
+          <span class="sr-only">メニュー</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a href="/" class="navbar-brand">EVENTAMA</a>
+  　     <%= image_tag 'eventma.jpg', :size =>'54x54' %>
+      </div>
+ 
+      <div id="gnavi" class="collapse navbar-collapse">
+        <ul class="nav navbar-nav navbar-right">
+
+        <% if logged_in? %>
+          <li><%= link_to '新規イベント登録', new_event_path %></li>
+          <li><%= link_to "イベント一覧画面", events_path %></li>
+          <li><%= link_to "マイページ", user_path(current_user.id) %></li>
+          <li><%= link_to "ログアウト", session_path(current_user.id), method: :delete %></li>
+
+        <% else %>
+          <li><%= link_to "新規ユーザ登録", new_user_path %></li>
+          <li><%= link_to "ＥＶＥＮＴＭＡログイン", new_session_path %></li>
+        <% end %>
+        </ul>
+      </div>
+    </nav>
+    
+      <% flash.each do |key, value| %>
+        <%= content_tag(:div, value, class: "#{key}") %>
+      <% end %>
+
+
+
+
+    <%= yield %>
+  </body>
+</html>

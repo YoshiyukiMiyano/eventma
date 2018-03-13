@@ -1,0 +1,51 @@
+<%= form_with(model: event, local: true) do |form| %>
+  <% if event.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(event.errors.count, "error") %> prohibited this event from being saved:</h2>
+
+      <ul>
+      <% event.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :イベント名 %>
+    <%= form.text_field :title, id: :event_title, size:50 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :開催日時 %>
+      <%= form.datetime_field :event_at %>
+  </div>
+
+  <div class="field">
+    <%= form.label :終了日時 %>
+      <%= form.datetime_field :eventend_at %>
+  </div>
+
+  <div class="field">
+    <%= form.label :場所 %>
+    <%= form.text_field :place, id: :event_place, 
+    placeholder:"東京都港区ｘｘx-xx-xx　○○ビルxx階 ○○セミナールーム", size:60 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :内容 %>
+    <%= form.text_area :content, id: :event_content, 
+    placeholder:"イベントの概要、詳細（費用、タイムテーブル等）フリーで記載ください", cols:70, rows:10 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :イベントイメージ画像 %>
+    <%= form.file_field :image, id: :event_image %>
+    <%= form.hidden_field :image_cache %>
+  </div>
+
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
